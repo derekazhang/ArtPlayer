@@ -1,18 +1,18 @@
+import validator from 'option-validator';
+import scheme from './scheme';
 import {
+    append,
+    assToVtt,
+    createElement,
+    escape,
+    getExt,
+    remove,
     setStyle,
     setStyles,
     srtToVtt,
     vttToBlob,
-    getExt,
-    assToVtt,
-    escape,
-    remove,
-    append,
-    createElement,
 } from './utils';
 import Component from './utils/component';
-import validator from 'option-validator';
-import scheme from './scheme';
 
 export default class Subtitle extends Component {
     constructor(art) {
@@ -70,7 +70,7 @@ export default class Subtitle extends Component {
     }
 
     async switch(url, newOption = {}) {
-        const { i18n, notice, option } = this.art;
+        const { notice, option } = this.art;
         const subtitleOption = { ...option.subtitle, ...newOption, url };
         const subUrl = await this.init(subtitleOption);
         if (newOption.name) {

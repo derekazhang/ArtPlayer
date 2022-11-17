@@ -3,8 +3,6 @@ import { clamp, def } from '../utils';
 export default function volumeMix(art) {
     const {
         template: { $video },
-        i18n,
-        notice,
         storage,
     } = art;
 
@@ -12,7 +10,6 @@ export default function volumeMix(art) {
         get: () => $video.volume || 0,
         set: (percentage) => {
             $video.volume = clamp(percentage, 0, 1);
-            notice.show = `${i18n.get('Volume')}: ${parseInt($video.volume * 100, 10)}`;
             if ($video.volume !== 0) {
                 storage.set('volume', $video.volume);
             }

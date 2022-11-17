@@ -1,18 +1,10 @@
-import { errorHandle, addClass, removeClass, isMobile } from '../utils';
+import { addClass, errorHandle, removeClass } from '../utils';
 import Component from '../utils/component';
 import fullscreen from './fullscreen';
-import fullscreenWeb from './fullscreenWeb';
-import pip from './pip';
 import playAndPause from './playAndPause';
 import progress from './progress';
 import time from './time';
 import volume from './volume';
-import setting from './setting';
-import thumbnails from './thumbnails';
-import screenshot from './screenshot';
-import quality from './quality';
-import loop from './loop';
-import airplay from './airplay';
 
 export default class Control extends Component {
     constructor(art) {
@@ -53,29 +45,11 @@ export default class Control extends Component {
             this.add(
                 progress({
                     name: 'progress',
-                    position: 'top',
+                    position: 'progress',
                     index: 10,
                 }),
             );
         }
-
-        if (option.thumbnails.url && !option.isLive && !isMobile) {
-            this.add(
-                thumbnails({
-                    name: 'thumbnails',
-                    position: 'top',
-                    index: 20,
-                }),
-            );
-        }
-
-        this.add(
-            loop({
-                name: 'loop',
-                position: 'top',
-                index: 30,
-            }),
-        );
 
         this.add(
             playAndPause({
@@ -101,66 +75,13 @@ export default class Control extends Component {
                     index: 30,
                 }),
             );
-        }
-
-        if (option.quality.length) {
-            this.add(
-                quality({
-                    name: 'quality',
-                    position: 'right',
-                    index: 10,
-                }),
-            );
-        }
-
-        if (option.screenshot && !isMobile) {
-            this.add(
-                screenshot({
-                    name: 'screenshot',
-                    position: 'right',
-                    index: 20,
-                }),
-            );
-        }
-
-        if (option.setting) {
-            this.add(
-                setting({
-                    name: 'setting',
-                    position: 'right',
-                    index: 30,
-                }),
-            );
-        }
-
-        if (option.pip) {
-            this.add(
-                pip({
-                    name: 'pip',
-                    position: 'right',
-                    index: 40,
-                }),
-            );
-        }
-
-        if (option.airplay && window.WebKitPlaybackTargetAvailabilityEvent) {
-            this.add(
-                airplay({
-                    name: 'airplay',
-                    position: 'right',
-                    index: 50,
-                }),
-            );
-        }
-
-        if (option.fullscreenWeb) {
-            this.add(
-                fullscreenWeb({
-                    name: 'fullscreenWeb',
-                    position: 'right',
-                    index: 60,
-                }),
-            );
+            // this.add(
+            //     time({
+            //         name: 'time',
+            //         position: 'right',
+            //         index: 30,
+            //     }),
+            // );
         }
 
         if (option.fullscreen) {
@@ -183,7 +104,7 @@ export default class Control extends Component {
         const { $progress, $controlsLeft, $controlsRight } = this.art.template;
 
         switch (option.position) {
-            case 'top':
+            case 'progress':
                 this.$parent = $progress;
                 break;
             case 'left':

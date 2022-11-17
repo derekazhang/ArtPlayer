@@ -1,8 +1,8 @@
-import style from 'bundle-text:./style.less';
-import danmuOn from 'bundle-text:./img/danmu-on.svg';
-import danmuOff from 'bundle-text:./img/danmu-off.svg';
 import danmuConfig from 'bundle-text:./img/danmu-config.svg';
+import danmuOff from 'bundle-text:./img/danmu-off.svg';
+import danmuOn from 'bundle-text:./img/danmu-on.svg';
 import danmuStyle from 'bundle-text:./img/danmu-style.svg';
+import style from 'bundle-text:./style.less';
 
 export default function setting(art, danmuku) {
     const { option } = danmuku;
@@ -189,12 +189,10 @@ export default function setting(art, danmuku) {
             click: function () {
                 if (danmuku.isHide) {
                     danmuku.show();
-                    art.notice.show = '弹幕显示';
                     setStyle($danmuOn, 'display', null);
                     setStyle($danmuOff, 'display', 'none');
                 } else {
                     danmuku.hide();
-                    art.notice.show = '弹幕隐藏';
                     setStyle($danmuOn, 'display', 'none');
                     setStyle($danmuOff, 'display', null);
                 }

@@ -1,28 +1,19 @@
 import style from 'bundle-text:./style/index.less';
 import validator from 'option-validator';
-import Emitter from './utils/emitter';
-import * as utils from './utils';
-import scheme from './scheme';
 import config from './config';
-import Whitelist from './whitelist';
-import Template from './template';
-import I18n from './i18n';
-import Player from './player';
 import Control from './control';
-import Contextmenu from './contextmenu';
-import Info from './info';
-import Subtitle from './subtitle';
 import Events from './events';
-import Hotkey from './hotkey';
+import Icons from './icons';
 import Layer from './layer';
 import Loading from './loading';
-import Notice from './notice';
 import Mask from './mask';
-import Icons from './icons';
-import Setting from './setting';
-import Storage from './storage';
+import Player from './player';
 import Plugins from './plugins';
-import Mobile from './mobile';
+import scheme from './scheme';
+import Storage from './storage';
+import Template from './template';
+import * as utils from './utils';
+import Emitter from './utils/emitter';
 
 let id = 0;
 const instances = [];
@@ -42,29 +33,17 @@ export default class Artplayer extends Emitter {
         this.isRotate = false;
         this.isDestroy = false;
 
-        this.whitelist = new Whitelist(this);
         this.template = new Template(this);
         this.events = new Events(this);
+        this.storage = new Storage(this);
+        this.icons = new Icons(this);
 
-        if (this.whitelist.state) {
-            this.storage = new Storage(this);
-            this.icons = new Icons(this);
-            this.i18n = new I18n(this);
-            this.notice = new Notice(this);
-            this.player = new Player(this);
-            this.layers = new Layer(this);
-            this.controls = new Control(this);
-            this.contextmenu = new Contextmenu(this);
-            this.subtitle = new Subtitle(this);
-            this.info = new Info(this);
-            this.loading = new Loading(this);
-            this.hotkey = new Hotkey(this);
-            this.mask = new Mask(this);
-            this.setting = new Setting(this);
-            this.plugins = new Plugins(this);
-        } else {
-            this.mobile = new Mobile(this);
-        }
+        this.player = new Player(this);
+        this.layers = new Layer(this);
+        this.controls = new Control(this);
+        this.loading = new Loading(this);
+        this.mask = new Mask(this);
+        this.plugins = new Plugins(this);
 
         if (typeof readyCallback === 'function') {
             this.on('ready', () => readyCallback.call(this, this));
@@ -141,56 +120,23 @@ export default class Artplayer extends Emitter {
             muted: false,
             autoplay: false,
             autoSize: false,
-            autoMini: false,
             loop: false,
-            flip: false,
-            playbackRate: false,
             aspectRatio: false,
-            screenshot: false,
-            setting: false,
-            hotkey: true,
-            pip: false,
             mutex: true,
             backdrop: true,
             fullscreen: false,
-            fullscreenWeb: false,
-            subtitleOffset: false,
             miniProgressBar: false,
             useSSR: false,
             playsInline: true,
             lock: false,
             fastForward: false,
-            autoPlayback: false,
             autoOrientation: false,
-            airplay: false,
             layers: [],
-            contextmenu: [],
             controls: [],
-            settings: [],
             quality: [],
-            highlight: [],
             plugins: [],
-            whitelist: [],
-            thumbnails: {
-                url: '',
-                number: 60,
-                column: 10,
-                width: 0,
-                height: 0,
-            },
-            subtitle: {
-                url: '',
-                type: '',
-                style: {},
-                encoding: 'utf-8',
-            },
-            moreVideoAttr: {
-                controls: false,
-                preload: utils.isSafari ? 'auto' : 'metadata',
-            },
             icons: {},
             customType: {},
-            lang: navigator.language.toLowerCase(),
         };
     }
 
@@ -216,8 +162,6 @@ export default class Artplayer extends Emitter {
 }
 
 Artplayer.DEGUG = false;
-Artplayer.CONTEXTMENU = true;
-Artplayer.NOTICE_TIME = 2000;
 Artplayer.SETTING_WIDTH = 250;
 Artplayer.SETTING_ITEM_WIDTH = 200;
 Artplayer.SETTING_ITEM_HEIGHT = 35;

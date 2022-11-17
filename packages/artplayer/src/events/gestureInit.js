@@ -1,5 +1,5 @@
-import { clamp, secondToTime, isMobile } from '../utils';
 import { setCurrentTime } from '../control/progress';
+import { clamp, isMobile } from '../utils';
 
 export default function gestureInit(art, events) {
     if (isMobile && !art.option.isLive) {
@@ -35,7 +35,6 @@ export default function gestureInit(art, events) {
                 const currentTime = clamp(startTime + art.duration * ratio * TOUCH_MOVE_RATIO, 0, art.duration);
                 art.seek = currentTime;
                 art.emit('setBar', 'played', clamp(currentTime / art.duration, 0, 1));
-                art.notice.show = `${secondToTime(currentTime)} / ${secondToTime(art.duration)}`;
             }
         };
 

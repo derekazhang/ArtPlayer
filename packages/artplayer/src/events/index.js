@@ -1,9 +1,9 @@
 import { ArtPlayerError } from '../utils/error';
 import clickInit from './clickInit';
-import hoverInit from './hoverInit';
-import mousemoveInit from './mousemoveInit';
-import resizeInit from './resizeInit';
 import gestureInit from './gestureInit';
+import hoverInit from './hoverInit';
+
+import resizeInit from './resizeInit';
 import viewInit from './viewInit';
 
 export default class Events {
@@ -13,14 +13,12 @@ export default class Events {
         this.hover = this.hover.bind(this);
         this.loadImg = this.loadImg.bind(this);
 
-        if (art.whitelist.state) {
+        
             clickInit(art, this);
             hoverInit(art, this);
-            mousemoveInit(art, this);
             resizeInit(art, this);
             gestureInit(art, this);
             viewInit(art, this);
-        }
     }
 
     proxy(target, name, callback, option = {}) {

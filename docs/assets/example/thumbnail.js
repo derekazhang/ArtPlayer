@@ -58,11 +58,6 @@ thumbnail.on('done', function () {
         url: thumbnail.videoUrl,
         autoSize: true,
         poster: thumbnail.thumbnailUrl,
-        thumbnails: {
-            url: thumbnail.thumbnailUrl,
-            number: thumbnail.option.number,
-            column: thumbnail.option.column,
-        },
     });
 
     console.log('Build player complete');

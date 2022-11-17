@@ -1,15 +1,15 @@
-import { append, tooltip, setStyle } from '../utils';
+import { append, setStyle, tooltip } from '../utils';
 
 export default function playAndPause(option) {
     return (art) => ({
         ...option,
         mounted: ($control) => {
-            const { proxy, icons, i18n } = art;
+            const { proxy, icons } = art;
 
             const $play = append($control, icons.play);
             const $pause = append($control, icons.pause);
-            tooltip($play, i18n.get('Play'));
-            tooltip($pause, i18n.get('Pause'));
+            tooltip($play, '播放');
+            tooltip($pause, '暂停');
 
             proxy($play, 'click', () => {
                 art.play();

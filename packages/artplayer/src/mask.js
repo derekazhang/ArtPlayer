@@ -8,13 +8,14 @@ export default class Mask extends Component {
         this.name = 'mask';
         const { template, icons, events } = art;
 
-        const $state = append(template.$state, icons.state);
+        // 播放按钮
+        // const $state = append(template.$state, icons.state);
         const $error = append(template.$state, icons.error);
 
         setStyle($error, 'display', 'none');
 
         art.on('destroy', () => {
-            setStyle($state, 'display', 'none');
+            // setStyle($state, 'display', 'none');
             setStyle($error, 'display', null);
         });
 

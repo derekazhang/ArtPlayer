@@ -1,4 +1,4 @@
-import { throttle, isInViewport } from '../utils';
+import { isInViewport, throttle } from '../utils';
 
 export default function viewInit(art, events) {
     const {
@@ -13,11 +13,5 @@ export default function viewInit(art, events) {
 
     events.proxy(window, 'scroll', () => {
         scrollFn();
-    });
-
-    art.on('view', (state) => {
-        if (option.autoMini) {
-            art.mini = !state;
-        }
     });
 }

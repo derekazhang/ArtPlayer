@@ -1,4 +1,4 @@
-import { query, clamp, append, setStyle, setStyles, secondToTime, includeFromEvent, isMobile } from '../utils';
+import { append, clamp, isMobile, query, secondToTime, setStyle, setStyles } from '../utils';
 
 export function getPosFromEvent(art, event) {
     const { $progress } = art.template;
@@ -26,7 +26,7 @@ export function setCurrentTime(art, event) {
 
 export default function progress(options) {
     return (art) => {
-        const { icons, option, proxy } = art;
+        const { icons, proxy } = art;
 
         return {
             ...options,
@@ -34,7 +34,6 @@ export default function progress(options) {
                 <div class="art-control-progress-inner">
                     <div class="art-progress-loaded"></div>
                     <div class="art-progress-played"></div>
-                    <div class="art-progress-highlight"></div>
                     <div class="art-progress-indicator"></div>
                     <div class="art-progress-tip"></div>
                 </div>
@@ -43,7 +42,6 @@ export default function progress(options) {
                 let isDroging = false;
                 const $loaded = query('.art-progress-loaded', $control);
                 const $played = query('.art-progress-played', $control);
-                const $highlight = query('.art-progress-highlight', $control);
                 const $indicator = query('.art-progress-indicator', $control);
                 const $tip = query('.art-progress-tip', $control);
 
@@ -82,20 +80,6 @@ export default function progress(options) {
                     height: `${indicatorSize}px`,
                 });
 
-                function showHighlight(event) {
-                    const { width } = getPosFromEvent(art, event);
-                    const { text } = event.target.dataset;
-                    $tip.innerHTML = text;
-                    const tipWidth = $tip.clientWidth;
-                    if (width <= tipWidth / 2) {
-                        setStyle($tip, 'left', 0);
-                    } else if (width > $control.clientWidth - tipWidth / 2) {
-                        setStyle($tip, 'left', `${$control.clientWidth - tipWidth}px`);
-                    } else {
-                        setStyle($tip, 'left', `${width - tipWidth / 2}px`);
-                    }
-                }
-
                 function showTime(event) {
                     const { width, time } = getPosFromEvent(art, event);
                     $tip.innerHTML = time;
@@ -119,17 +103,6 @@ export default function progress(options) {
                         setStyle($indicator, 'left', `calc(${percentage * 100}% - ${indicatorSize / 2}px)`);
                     }
                 }
-
-                art.on('video:loadedmetadata', () => {
-                    for (let index = 0; index < option.highlight.length; index++) {
-                        const item = option.highlight[index];
-                        const left = (clamp(item.time, 0, art.duration) / art.duration) * 100;
-                        append(
-                            $highlight,
-                            `<span data-text="${item.text}" data-time="${item.time}" style="left: ${left}%"></span>`,
-                        );
-                    }
-                });
 
                 setBar('loaded', art.loaded);
 
@@ -158,11 +131,7 @@ export default function progress(options) {
 
                     proxy($control, 'mousemove', (event) => {
                         setStyle($tip, 'display', 'block');
-                        if (includeFromEvent(event, $highlight)) {
-                            showHighlight(event);
-                        } else {
-                            showTime(event);
-                        }
+                        showTime(event);
                     });
 
                     proxy($control, 'mouseout', () => {

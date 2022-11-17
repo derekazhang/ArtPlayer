@@ -2,8 +2,6 @@ import { def } from '../utils';
 
 export default function playMix(art) {
     const {
-        i18n,
-        notice,
         option,
         constructor: { instances },
         template: { $video },
@@ -12,7 +10,6 @@ export default function playMix(art) {
     def(art, 'play', {
         value: async function () {
             const result = await $video.play();
-            notice.show = i18n.get('Play');
             art.emit('play');
 
             if (option.mutex) {

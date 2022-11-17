@@ -403,49 +403,6 @@ export type Events = {
     selector: [selector: Selector, $item: HTMLDivElement];
 };
 
-type I18nKeys = 'en' | 'zh-cn' | 'zh-tw' | 'pl' | 'cs' | 'es' | 'fa' | (string & Record<never, never>);
-
-type I18nValue = {
-    'Video Info': string;
-    Close: string;
-    'Video Load Failed': string;
-    Volume: string;
-    Play: string;
-    Pause: string;
-    Rate: string;
-    Mute: string;
-    'Video Flip': string;
-    Horizontal: string;
-    Vertical: string;
-    Reconnect: string;
-    'Show Setting': string;
-    'Hide Setting': string;
-    Screenshot: string;
-    'Play Speed': string;
-    'Aspect Ratio': string;
-    Default: string;
-    Normal: string;
-    Open: string;
-    'Switch Video': string;
-    'Switch Subtitle': string;
-    Fullscreen: string;
-    'Exit Fullscreen': string;
-    'Web Fullscreen': string;
-    'Exit Web Fullscreen': string;
-    'Mini Player': string;
-    'PIP Mode': string;
-    'Exit PIP Mode': string;
-    'PIP Not Supported': string;
-    'Fullscreen Not Supported': string;
-    'Subtitle Offset': string;
-    'Last Seen': string;
-    'Jump Play': string;
-    AirPlay: string;
-    'AirPlay Not Available': string;
-};
-
-export type I18n = Record<I18nKeys, Partial<I18nValue>>;
-
 export type Icons = {
     readonly loading: HTMLDivElement;
     readonly state: HTMLDivElement;
@@ -476,8 +433,6 @@ export type Icons = {
     readonly airplay: HTMLDivElement;
     readonly [key: string]: HTMLDivElement;
 };
-
-
 
 
 
@@ -728,36 +683,6 @@ export type Option = {
     }[];
 
     /**
-     * Custom thumbnail
-     */
-    thumbnails?: {
-        /**
-         * The thumbnail image url
-         */
-        url: string;
-
-        /**
-         * The thumbnail item number
-         */
-        number?: number;
-
-        /**
-         * The thumbnail column size
-         */
-        column?: number;
-
-        /**
-         * The thumbnail width
-         */
-        width?: number;
-
-        /**
-         * The thumbnail height
-         */
-        height?: number;
-    };
-
-    /**
      * Custom subtitle option
      */
     subtitle?: Subtitle;
@@ -856,92 +781,6 @@ export declare class Player {
     screenshot(): Promise<string>;
     airplay(): void;
 }
-
-
-
-type Props<T> = {
-    html: string;
-    icon: string;
-    tooltip: string;
-    $icon: HTMLDivElement;
-    $html: HTMLDivElement;
-    $tooltip: HTMLDivElement;
-    $switch: boolean;
-    $range: HTMLInputElement;
-    $parentItem: Setting;
-    $parentList: Setting[];
-} & Omit<T, 'html' | 'icon' | 'tooltip'>;
-
-export type SettingOption = Props<Setting>;
-
-export type Setting = {
-    /**
-     * Html string or html element of setting name
-     */
-    html: string | HTMLElement;
-
-    /**
-     * Html string or html element of setting icon
-     */
-    icon?: string | HTMLElement;
-
-    /**
-     * The width of setting
-     */
-    width?: number;
-
-    /**
-     * The tooltip of setting
-     */
-    tooltip?: string | HTMLElement;
-
-    /**
-     * Whether the default is selected
-     */
-    default?: boolean;
-
-    /**
-     * Custom selector list
-     */
-    selector?: Setting[];
-
-    /**
-     * Wnen the setting was mounted
-     */
-    mounted?(this: Artplayer, panel: HTMLDivElement, item: Setting): void;
-
-    /**
-     * When selector item click
-     */
-    onSelect?(this: Artplayer, item: SettingOption, element: HTMLDivElement, event: Event): void;
-
-    /**
-     * Custom switch item
-     */
-    switch?: boolean;
-
-    /**
-     * When switch item click
-     */
-    onSwitch?(this: Artplayer, item: SettingOption, element: HTMLDivElement, event: Event): void;
-
-    /**
-     * Custom range item
-     */
-    range?: [value?: number, min?: number, max?: number, step?: number];
-
-    /**
-     * When range item change
-     */
-    onRange?(this: Artplayer, item: SettingOption, element: HTMLDivElement, event: Event): void;
-
-    /**
-     * When range item change in real time
-     */
-    onChange?(this: Artplayer, item: SettingOption, element: HTMLDivElement, event: Event): void;
-
-    [key: string]: any;
-};
 
 export type Subtitle = {
     /**

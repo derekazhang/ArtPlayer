@@ -1,10 +1,8 @@
 import screenfull from '../libs/screenfull';
-import { addClass, removeClass, def, get } from '../utils';
+import { addClass, def, get, removeClass } from '../utils';
 
 export default function fullscreenMix(art) {
     const {
-        i18n,
-        notice,
         template: { $video, $player },
     } = art;
 
@@ -22,7 +20,6 @@ export default function fullscreenMix(art) {
                     addClass($player, 'art-fullscreen');
                     art.emit('resize');
                     art.emit('fullscreen', true);
-                    notice.show = '';
                 } else {
                     art.aspectRatioReset = true;
                     art.autoSize = art.option.autoSize;
@@ -30,7 +27,6 @@ export default function fullscreenMix(art) {
                     removeClass($player, 'art-fullscreen');
                     art.emit('resize');
                     art.emit('fullscreen', false);
-                    notice.show = '';
                 }
             },
         });
@@ -46,11 +42,9 @@ export default function fullscreenMix(art) {
                     art.normalSize = 'fullscreen';
                     $video.webkitEnterFullscreen();
                     art.emit('fullscreen', true);
-                    notice.show = '';
                 } else {
                     $video.webkitExitFullscreen();
                     art.emit('fullscreen', false);
-                    notice.show = '';
                 }
             },
         });
@@ -65,9 +59,6 @@ export default function fullscreenMix(art) {
             def(art, 'fullscreen', {
                 get() {
                     return false;
-                },
-                set() {
-                    notice.show = i18n.get('Fullscreen Not Supported');
                 },
             });
         }

@@ -1,8 +1,6 @@
-import { Subtitle } from './subtitle';
-import { Setting } from './setting';
-import { Icons } from './icons';
-import { I18n } from './i18n';
 import { ComponentOption } from './component';
+import { Icons } from './icons';
+import { Subtitle } from './subtitle';
 import Artplayer = require('./artplayer');
 
 type CustomType = 'flv' | 'm3u8' | 'hls' | 'ts' | 'mpd' | 'torrent' | (string & Record<never, never>);
@@ -247,36 +245,6 @@ export type Option = {
          */
         text: string;
     }[];
-
-    /**
-     * Custom thumbnail
-     */
-    thumbnails?: {
-        /**
-         * The thumbnail image url
-         */
-        url: string;
-
-        /**
-         * The thumbnail item number
-         */
-        number?: number;
-
-        /**
-         * The thumbnail column size
-         */
-        column?: number;
-
-        /**
-         * The thumbnail width
-         */
-        width?: number;
-
-        /**
-         * The thumbnail height
-         */
-        height?: number;
-    };
 
     /**
      * Custom subtitle option

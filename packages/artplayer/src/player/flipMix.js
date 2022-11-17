@@ -1,10 +1,8 @@
-import { def, capitalize } from '../utils';
+import { capitalize, def } from '../utils';
 
 export default function flipMix(art) {
     const {
         template: { $player },
-        i18n,
-        notice,
     } = art;
 
     def(art, 'flip', {

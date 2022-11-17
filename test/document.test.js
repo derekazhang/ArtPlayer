@@ -1101,13 +1101,6 @@ describe('Document', function () {
         var art = new Artplayer({
             container: '.artplayer-app',
             url: './assets/sample/video.mp4',
-            thumbnails: {
-                url: './assets/sample/thumbnails.png',
-
-                number: 100,
-
-                column: 10,
-            },
         });
 
         testAll(art, done);

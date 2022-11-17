@@ -1,7 +1,7 @@
 import { def } from '../utils';
 
 export default function normalSizeMix(art) {
-    const sizeProps = ['mini', 'pip', 'fullscreen', 'fullscreenWeb'];
+    const sizeProps = ['fullscreen'];
 
     def(art, 'normalSize', {
         get() {

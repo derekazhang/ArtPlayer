@@ -1,10 +1,10 @@
-import { append, clamp, tooltip, setStyle, isMobile } from '../utils';
+import { append, clamp, isMobile, setStyle, tooltip } from '../utils';
 
 export default function volume(option) {
     return (art) => ({
         ...option,
         mounted: ($control) => {
-            const { proxy, icons, i18n } = art;
+            const { proxy, icons } = art;
 
             let isDroging = false;
             const panelWidth = art.constructor.VOLUME_PANEL_WIDTH;
@@ -13,7 +13,7 @@ export default function volume(option) {
             const $volumeClose = append($control, icons.volumeClose);
             const $volumePanel = append($control, '<div class="art-volume-panel"></div>');
             const $volumeHandle = append($volumePanel, '<div class="art-volume-slider-handle"></div>');
-            tooltip($volume, i18n.get('Mute'));
+            tooltip($volume, '静音');
             setStyle($volumeClose, 'display', 'none');
 
             if (isMobile) {

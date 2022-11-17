@@ -1,11 +1,11 @@
-import { append, tooltip, setStyle } from '../utils';
+import { append, setStyle, tooltip } from '../utils';
 
 export default function fullscreen(option) {
     return (art) => ({
         ...option,
-        tooltip: art.i18n.get('Fullscreen'),
+        tooltip: '全屏',
         mounted: ($control) => {
-            const { proxy, icons, i18n } = art;
+            const { proxy, icons } = art;
 
             const $fullscreenOn = append($control, icons.fullscreenOn);
             const $fullscreenOff = append($control, icons.fullscreenOff);
@@ -17,11 +17,11 @@ export default function fullscreen(option) {
 
             art.on('fullscreen', (value) => {
                 if (value) {
-                    tooltip($control, i18n.get('Exit Fullscreen'));
+                    tooltip($control, '退出全屏');
                     setStyle($fullscreenOn, 'display', 'none');
                     setStyle($fullscreenOff, 'display', 'inline-flex');
                 } else {
-                    tooltip($control, i18n.get('Fullscreen'));
+                    tooltip($control, '全屏');
                     setStyle($fullscreenOn, 'display', 'inline-flex');
                     setStyle($fullscreenOff, 'display', 'none');
                 }

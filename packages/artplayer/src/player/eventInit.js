@@ -1,10 +1,8 @@
 import config from '../config';
-import { sleep, addClass, setStyle, isMobile } from '../utils';
+import { addClass, isMobile, setStyle, sleep } from '../utils';
 
 export default function eventInit(art) {
     const {
-        i18n,
-        notice,
         option,
         constructor,
         proxy,
@@ -65,7 +63,6 @@ export default function eventInit(art) {
             await sleep(constructor.RECONNECT_SLEEP_TIME);
             reconnectTime += 1;
             art.url = option.url;
-            notice.show = `${i18n.get('Reconnect')}: ${reconnectTime}`;
             art.emit('error', error, reconnectTime);
         } else {
             art.mask.show = true;
@@ -73,7 +70,6 @@ export default function eventInit(art) {
             art.controls.show = true;
             addClass($player, 'art-error');
             await sleep(constructor.RECONNECT_SLEEP_TIME);
-            notice.show = i18n.get('Video Load Failed');
             art.destroy(false);
         }
     });

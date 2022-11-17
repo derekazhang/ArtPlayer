@@ -1,10 +1,8 @@
-import { setStyle, def } from '../utils';
+import { def, setStyle } from '../utils';
 
 export default function aspectRatioMix(art) {
     const {
         template: { $video, $player },
-        i18n,
-        notice,
     } = art;
 
     def(art, 'aspectRatio', {
@@ -37,8 +35,6 @@ export default function aspectRatioMix(art) {
                 }
                 $player.dataset.aspectRatio = ratio;
             }
-
-            notice.show = `${i18n.get('Aspect Ratio')}: ${ratio === 'default' ? i18n.get('Default') : ratio}`;
             art.emit('aspectRatio', ratio);
         },
     });

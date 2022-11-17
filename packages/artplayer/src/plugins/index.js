@@ -1,9 +1,8 @@
-import { errorHandle, isMobile, has, def } from '../utils';
-import miniProgressBar from './miniProgressBar';
+import { def, errorHandle, has, isMobile } from '../utils';
 import autoOrientation from './autoOrientation';
-import autoPlayback from './autoPlayback';
 import fastForward from './fastForward';
 import lock from './lock';
+import miniProgressBar from './miniProgressBar';
 
 export default class Plugins {
     constructor(art) {
@@ -18,10 +17,6 @@ export default class Plugins {
 
         if (option.lock && isMobile) {
             this.add(lock);
-        }
-
-        if (option.autoPlayback && !option.isLive) {
-            this.add(autoPlayback);
         }
 
         if (option.autoOrientation && isMobile) {
