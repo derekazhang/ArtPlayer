@@ -1,7 +1,7 @@
 {
     "license": "MIT",
     "version": "1.0.0",
-    "name": "artplayer-plugin-hls-quality",
+    "name": "dami-artplayer-plugin-hls-quality",
     "types": "types/artplayer-plugin-hls-quality.d.ts",
     "description": "Iframe plugin for ArtPlayer",
     "main": "dist/artplayer-plugin-hls-quality.js",

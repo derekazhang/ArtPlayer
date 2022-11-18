@@ -18,137 +18,135 @@ import Emitter from './utils/emitter';
 let id = 0;
 const instances = [];
 export default class Artplayer extends Emitter {
-  constructor(option, readyCallback) {
-    super();
+    constructor(option, readyCallback) {
+        super();
 
-    this.id = ++id;
+        this.id = ++id;
 
-    const mergeOption = utils.mergeDeep(Artplayer.option, option);
-    this.option = validator(mergeOption, scheme);
+        const mergeOption = utils.mergeDeep(Artplayer.option, option);
+        this.option = validator(mergeOption, scheme);
 
-    this.isLock = false;
-    this.isReady = false;
-    this.isFocus = false;
-    this.isInput = false;
-    this.isRotate = false;
-    this.isDestroy = false;
+        this.isLock = false;
+        this.isReady = false;
+        this.isFocus = false;
+        this.isInput = false;
+        this.isRotate = false;
+        this.isDestroy = false;
 
-    this.template = new Template(this);
-    this.events = new Events(this);
-    this.storage = new Storage(this);
-    this.icons = new Icons(this);
+        this.template = new Template(this);
+        this.events = new Events(this);
+        this.storage = new Storage(this);
+        this.icons = new Icons(this);
 
-    this.player = new Player(this);
-    this.layers = new Layer(this);
-    this.controls = new Control(this);
-    this.loading = new Loading(this);
-    this.mask = new Mask(this);
-    this.plugins = new Plugins(this);
+        this.player = new Player(this);
+        this.layers = new Layer(this);
+        this.controls = new Control(this);
+        this.loading = new Loading(this);
+        this.mask = new Mask(this);
+        this.plugins = new Plugins(this);
 
-    if (typeof readyCallback === 'function') {
-      this.on('ready', () => readyCallback.call(this, this));
+        if (typeof readyCallback === 'function') {
+            this.on('ready', () => readyCallback.call(this, this));
+        }
+
+        if (Artplayer.DEGUG) {
+            const log = (msg) => console.log(`[ART.${this.id}] -> ${msg}`);
+            log('Version@' + Artplayer.version);
+            log('Env@' + Artplayer.env);
+            log('Build@' + Artplayer.build);
+            for (let index = 0; index < config.events.length; index++) {
+                this.on('video:' + config.events[index], (event) => log('Event@' + event.type));
+            }
+        }
+
+        instances.push(this);
     }
 
-    if (Artplayer.DEGUG) {
-      const log = (msg) => console.log(`[ART.${this.id}] -> ${msg}`);
-      log('Version@' + Artplayer.version);
-      log('Env@' + Artplayer.env);
-      log('Build@' + Artplayer.build);
-      for (let index = 0; index < config.events.length; index++) {
-        this.on('video:' + config.events[index], (event) =>
-          log('Event@' + event.type)
-        );
-      }
+    static get instances() {
+        return instances;
     }
 
-    instances.push(this);
-  }
+    static get config() {
+        return config;
+    }
 
-  static get instances() {
-    return instances;
-  }
+    static get utils() {
+        return utils;
+    }
 
-  static get config() {
-    return config;
-  }
+    static get scheme() {
+        return scheme;
+    }
 
-  static get utils() {
-    return utils;
-  }
+    static get Emitter() {
+        return Emitter;
+    }
 
-  static get scheme() {
-    return scheme;
-  }
+    static get validator() {
+        return validator;
+    }
 
-  static get Emitter() {
-    return Emitter;
-  }
+    static get kindOf() {
+        return validator.kindOf;
+    }
 
-  static get validator() {
-    return validator;
-  }
+    static get html() {
+        return Template.html;
+    }
 
-  static get kindOf() {
-    return validator.kindOf;
-  }
+    static get option() {
+        return {
+            id: '',
+            container: '#artplayer',
+            url: '',
+            poster: '',
+            title: '',
+            type: '',
+            theme: '#f00',
+            volume: 0.7,
+            isLive: false,
+            muted: false,
+            autoplay: false,
+            autoSize: false,
+            loop: false,
+            aspectRatio: false,
+            mutex: true,
+            backdrop: true,
+            fullscreen: false,
+            miniProgressBar: false,
+            useSSR: false,
+            playsInline: true,
+            lock: false,
+            fastForward: false,
+            autoOrientation: false,
+            layers: [],
+            controls: [],
+            quality: [],
+            plugins: [],
+            icons: {},
+            customType: {},
+        };
+    }
 
-  static get html() {
-    return Template.html;
-  }
+    get proxy() {
+        return this.events.proxy;
+    }
 
-  static get option() {
-    return {
-      id: '',
-      container: '#artplayer',
-      url: '',
-      poster: '',
-      title: '',
-      type: '',
-      theme: '#f00',
-      volume: 0.7,
-      isLive: false,
-      muted: false,
-      autoplay: false,
-      autoSize: false,
-      loop: false,
-      aspectRatio: false,
-      mutex: true,
-      backdrop: true,
-      fullscreen: false,
-      miniProgressBar: false,
-      useSSR: false,
-      playsInline: true,
-      lock: false,
-      fastForward: false,
-      autoOrientation: false,
-      layers: [],
-      controls: [],
-      quality: [],
-      plugins: [],
-      icons: {},
-      customType: {},
-    };
-  }
+    get query() {
+        return this.template.query;
+    }
 
-  get proxy() {
-    return this.events.proxy;
-  }
+    get video() {
+        return this.template.$video;
+    }
 
-  get query() {
-    return this.template.query;
-  }
-
-  get video() {
-    return this.template.$video;
-  }
-
-  destroy(removeHtml = true) {
-    this.events.destroy();
-    this.template.destroy(removeHtml);
-    instances.splice(instances.indexOf(this), 1);
-    this.isDestroy = true;
-    this.emit('destroy');
-  }
+    destroy(removeHtml = true) {
+        this.events.destroy();
+        this.template.destroy(removeHtml);
+        instances.splice(instances.indexOf(this), 1);
+        this.isDestroy = true;
+        this.emit('destroy');
+    }
 }
 
 Artplayer.DEGUG = false;
@@ -186,21 +184,21 @@ Artplayer.ASPECT_RATIO = ['default', '4:3', '16:9'];
 Artplayer.FLIP = ['normal', 'horizontal', 'vertical'];
 
 if (typeof document !== 'undefined') {
-  if (!document.getElementById('artplayer-style')) {
-    const $style = utils.createElement('style');
-    $style.id = 'artplayer-style';
-    $style.textContent = style;
-    document.head.appendChild($style);
-  }
+    if (!document.getElementById('artplayer-style')) {
+        const $style = utils.createElement('style');
+        $style.id = 'artplayer-style';
+        $style.textContent = style;
+        document.head.appendChild($style);
+    }
 }
 
 if (typeof window !== 'undefined') {
-  window['Artplayer'] = Artplayer;
+    window['Artplayer'] = Artplayer;
 }
 
 console.log(
-  `%c ArtPlayer %c ${Artplayer.version} %c https://artplayer.org`,
-  'color: #fff; background: #5f5f5f',
-  'color: #fff; background: #4bc729',
-  ''
+    `%c ArtPlayer %c ${Artplayer.version} %c https://artplayer.org`,
+    'color: #fff; background: #5f5f5f',
+    'color: #fff; background: #4bc729',
+    '',
 );

@@ -1,7 +1,7 @@
 {
     "license": "MIT",
     "version": "4.3.12",
-    "name": "artplayer-tool-thumbnail",
+    "name": "dami-artplayer-tool-thumbnail",
     "description": "Thumbnail tool for ArtPlayer",
     "main": "dist/artplayer-tool-thumbnail.js",
     "legacy": "dist/artplayer-tool-thumbnail.legacy.js",
