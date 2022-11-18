@@ -13,12 +13,11 @@ export default class Events {
         this.hover = this.hover.bind(this);
         this.loadImg = this.loadImg.bind(this);
 
-        
-            clickInit(art, this);
-            hoverInit(art, this);
-            resizeInit(art, this);
-            gestureInit(art, this);
-            viewInit(art, this);
+        clickInit(art, this);
+        hoverInit(art, this);
+        resizeInit(art, this);
+        gestureInit(art, this);
+        viewInit(art, this);
     }
 
     proxy(target, name, callback, option = {}) {

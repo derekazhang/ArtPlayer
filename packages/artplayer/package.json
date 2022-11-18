@@ -1,9 +1,10 @@
 {
     "license": "MIT",
-    "name": "artplayer",
+    "name": "dami-artplayer",
     "version": "4.5.11",
+    "source": "src/index.js",
     "main": "dist/artplayer.js",
-    "legacy": "dist/artplayer.legacy.js",
+    "type": "module",
     "types": "types/artplayer.d.ts",
     "homepage": "https://artplayer.org",
     "author": "Harvey Zack <laozhaochaguan@gmail.com>",
@@ -21,8 +22,22 @@
         "video",
         "player"
     ],
+    "scripts": {
+        "watch": "parcel watch",
+        "builds": "parcel build"
+    },
     "dependencies": {
         "option-validator": "^2.0.6",
         "screenfull": "^6.0.2"
+    },
+    "devDependencies": {
+        "parcel": "latest",
+        "@parcel/config-default": "^2.5.0",
+        "@parcel/core": "^2.5.0",
+        "@parcel/optimizer-data-url": "^2.5.0",
+        "@parcel/reporter-cli": "^2.5.0",
+        "@parcel/transformer-inline-string": "^2.5.0",
+        "@parcel/transformer-less": "^2.5.0",
+        "@parcel/transformer-vue": "^2.5.0"
     }
 }

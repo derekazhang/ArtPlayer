@@ -1,5 +1,5 @@
 {
-    "name": "artplayer-packages",
+    "name": "dami-artplayer-packages",
     "version": "4.4.0",
     "type": "module",
     "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
@@ -18,16 +18,16 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        "url": "git+https://github.com/derekazhang/ArtPlayer.git"
     },
     "keywords": [
         "video",
         "player"
     ],
-    "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+    "author": "DerekaZhang <dami7786@qq.com>",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        "url": "https://github.com/derekazhang/ArtPlayer/issues"
     },
     "homepage": "https://artplayer.org",
     "browserslist": "> 0.5%, last 2 versions, not dead",
